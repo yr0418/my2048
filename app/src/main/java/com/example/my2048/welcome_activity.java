@@ -23,7 +23,10 @@ public class welcome_activity extends AppCompatActivity {
 
         setContentView(R.layout.activity_welcome_activity);
 
-        showToast();
+        //显示toast
+        Toast.makeText(welcome_activity.this,"专为肖雯静同学制作",Toast.LENGTH_LONG).show();
+
+        //界面跳转
         skip();
     }
 
@@ -41,15 +44,4 @@ public class welcome_activity extends AppCompatActivity {
         timer.schedule(timerTask,1000*4);
     }
 
-    protected void showToast(){
-        Timer timer=new Timer();
-        TimerTask timerTask=new TimerTask() {
-            @Override
-            public void run() {
-                //显示toast
-                Toast.makeText(welcome_activity.this,"专为肖雯静同学制作",Toast.LENGTH_LONG).show();
-            }
-        };
-        timer.schedule(timerTask,1000*1);
-    }
 }
