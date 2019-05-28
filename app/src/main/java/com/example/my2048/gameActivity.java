@@ -32,24 +32,5 @@ public class gameActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_game);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        linearLayout = (LinearLayout)findViewById(R.id.mylinearlaout);
-
-        // 开始游戏的逻辑
-        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();//屏幕宽度
-        GameView.getGameView().initGameView(width);
-        //设置表格的高度
-
-        ViewGroup.LayoutParams lp;
-        lp= linearLayout.getLayoutParams();
-        lp.width=width;
-        lp.height=width;
-        linearLayout.setLayoutParams(lp);
-
-
-
-
     }
 }

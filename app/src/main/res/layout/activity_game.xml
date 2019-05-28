@@ -5,74 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.my2048.gameActivity"
-    android:background="@drawable/back2"
-    android:orientation="vertical">
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvScore"/>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:orientation="vertical"
-                    android:background="@android:color/black"
-                    android:layout_marginRight="5dp">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:orientation="vertical"
-                    android:background="@android:color/black"
-                    android:layout_marginRight="5dp">
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mylinearlaout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.example.my2048.tool.GameView
-                    android:id="@+id/gameView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </com.example.my2048.tool.GameView>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/white"
-            android:orientation="vertical">
-
-            <ListView
-                android:id="@+id/listView1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ListView>
-        </LinearLayout>
-
-    </android.support.v4.widget.DrawerLayout>
+    <com.example.my2048.tool.GameView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/gameView">
+    </com.example.my2048.tool.GameView>
 </LinearLayout>
