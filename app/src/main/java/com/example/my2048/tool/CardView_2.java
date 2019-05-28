@@ -1,6 +1,7 @@
 package com.example.my2048.tool;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -15,8 +16,11 @@ public class CardView_2 extends FrameLayout {
         super(context);
         label=new TextView(getContext());
         label.setTextSize(32);
+        label.setGravity(Gravity.CENTER);
+        label.setBackgroundColor(0x33ffffff);
 
         LayoutParams layoutParams=new LayoutParams(-1,-1);//填充父类容器
+        layoutParams.setMargins(20,20,0,0);
         addView(label,layoutParams);
         setNum(0);
     }

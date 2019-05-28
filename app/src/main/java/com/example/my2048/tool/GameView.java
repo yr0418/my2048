@@ -21,31 +21,34 @@ import java.util.List;
 public class GameView extends GridLayout {
 
 //    private gameActivity my2048;
-//    private static GameView gview;
+    private static GameView gview;
     private float startX, startY, endX, endY, offX, offY;
     private int row = 4, colunm = 4;// 行row对应y，列colunm对应x,默认开始都为4
-    private CardView_2[][] cardsMap = new CardView_2[10][10];// 用一个二维数组来存
+    private CardView[][] cardsMap = new CardView[10][10];// 用一个二维数组来存
     private List<Point> emptyPoints = new ArrayList<Point>();// 链表方便增加删除
     // 在xml中能够访问则要添加构造方法
     // 以防万一三个构造方法都要写:对应参分别为上下文，属性，样式
     public GameView(Context context) {
         super(context);
-        initGameView();
+        //initGameView();
+        gview = this;
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initGameView();
+//        initGameView();
+        gview = this;
     }
 
     public GameView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initGameView();
+//        initGameView();
+        gview = this;
     }
 
-//    public static GameView getGameView() {
-//        return gview;
-//    }
+    public static GameView getGameView() {
+        return gview;
+    }
 
     // 由于手机可能不同，我们需要动态地获取卡片的宽高，所以要重写下面这个方法获取当前布局的宽高，
     // 为了让手机不会因倒过来改变宽高，要去mainifest里配置
@@ -54,8 +57,6 @@ public class GameView extends GridLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        int cardwidth=(Math.min(w,h)-10)/4;
-        System.out.println(cardwidth);
     }
 
 
@@ -73,12 +74,12 @@ public class GameView extends GridLayout {
         DisplayMetrics displayMetrics;
         displayMetrics = getResources().getDisplayMetrics();
         int width=displayMetrics.widthPixels;
-        int cardWidth=(width-10)/4;
-        CardView_2 c;
+        int cardWidth=(width-20)/4;
+        CardView c;
         //cw = cardWidth;
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                c = new CardView_2(getContext());
+                c = new CardView(getContext());
                 // 先都初始画0号图片
                 c.setNum(0);
                 addView(c,cardWidth,cardWidth);
@@ -104,7 +105,7 @@ public class GameView extends GridLayout {
         cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
     }
 
-    private void initGameView() {
+    public void initGameView() {
        // my2048 = (gameActivity) this.getContext();
 //        colunm = 4;
 //        row = 4;

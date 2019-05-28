@@ -22,7 +22,7 @@ public class CardView extends FrameLayout {
         putPic();
         pic = new ImageView(getContext());
         lp = new LayoutParams(-1, -1);// -1,-1就是填充完父类容器的意思
-        lp.setMargins(10, 10, 0, 0);// 用来设置边框很管用
+        lp.setMargins(20, 20, 0, 0);// 用来设置边框很管用
         addView(pic, lp);// 把imageView加到CardView上
         setNum(0);
     }
@@ -51,6 +51,7 @@ public class CardView extends FrameLayout {
 
     public void setNum(int num) {
         this.num = num;
+        pic.setBackgroundResource(picArray[num]);
     }
 
     // 判断数字是否相同

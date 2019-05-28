@@ -32,5 +32,17 @@ public class gameActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_game);
+
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.mylinearlaout);
+
+        GameView.getGameView().initGameView();
+
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();//屏幕宽度
+        ViewGroup.LayoutParams lp;
+        lp= linearLayout.getLayoutParams();
+        lp.width=width;
+        lp.height=width;
+        linearLayout.setLayoutParams(lp);
     }
 }
