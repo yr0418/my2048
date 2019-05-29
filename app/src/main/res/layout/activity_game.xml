@@ -5,31 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back2"
-    tools:context="com.example.my2048.gameActivity"
     android:orientation="vertical"
-    >
+    tools:context="com.example.my2048.gameActivity">
+
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/score"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvScore"/>
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="46dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/restart" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="144dp"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/mylinearlaout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <com.example.my2048.tool.GameView
             android:id="@+id/gameView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </com.example.my2048.tool.GameView>
+            android:layout_height="match_parent"></com.example.my2048.tool.GameView>
     </LinearLayout>
+
+
 </LinearLayout>

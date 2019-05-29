@@ -71,6 +71,7 @@ public class GameView extends GridLayout {
     }
 
     private void addCards() {
+        //获取屏幕宽度
         DisplayMetrics displayMetrics;
         displayMetrics = getResources().getDisplayMetrics();
         int width=displayMetrics.widthPixels;
@@ -106,15 +107,10 @@ public class GameView extends GridLayout {
     }
 
     public void initGameView() {
-       // my2048 = (gameActivity) this.getContext();
-//        colunm = 4;
-//        row = 4;
         setColumnCount(4);// 设置表格为4列
-        //setRowCount(4);
-//        int cardWidth = (w - 10) / 4;
         addCards();// 把参数传过去
         startGame();
-        setBackgroundColor(0xffbbada0);
+        setBackgroundColor(0xffccccff);
         setOnTouchListener(new OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();// 获取触屏的动作
@@ -305,7 +301,6 @@ public class GameView extends GridLayout {
                             .setMessage("游戏胜利")
                             .setPositiveButton("重来",
                                     new DialogInterface.OnClickListener() {
-
                                         @Override
                                         public void onClick(
                                                 DialogInterface dialog,
@@ -336,7 +331,6 @@ public class GameView extends GridLayout {
                     .setMessage("游戏结束")
                     .setPositiveButton("重来",
                             new DialogInterface.OnClickListener() {
-
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                                     int which) {

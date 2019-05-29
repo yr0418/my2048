@@ -1,6 +1,8 @@
 package com.example.my2048;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.SystemClock;
@@ -12,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ public class gameActivity extends AppCompatActivity {
 
         GameView.getGameView().initGameView();
 
+        ImageButton resbtn = (ImageButton) findViewById(R.id.imageButton3);
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();//屏幕宽度
         ViewGroup.LayoutParams lp;
@@ -44,5 +48,31 @@ public class gameActivity extends AppCompatActivity {
         lp.width=width;
         lp.height=width;
         linearLayout.setLayoutParams(lp);
+
+        //重新开始游戏
+        resbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new AlertDialog.Builder(getgameActivity())
+                        .setTitle("重启游戏")
+                        .setMessage("确定重启游戏吗？")
+                        .setNegativeButton("否", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                GameView.getGameView().startGame();
+                                //clearScore();
+                            }
+                        })
+                        .create().show();
+            }
+        });
+    }
+
+    private gameActivity getgameActivity(){
+        return this;
     }
 }

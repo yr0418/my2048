@@ -51,6 +51,7 @@ public class CardView extends FrameLayout {
 
     public void setNum(int num) {
         this.num = num;
+        //将显示的数字改为图片
         pic.setBackgroundResource(picArray[num]);
     }
 
