@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GameView extends GridLayout {
 
-//    private gameActivity my2048;
+    private gameActivity my2048;
     private static GameView gview;
     private float startX, startY, endX, endY, offX, offY;
     private int row = 4, colunm = 4;// 行row对应y，列colunm对应x,默认开始都为4
@@ -53,7 +53,6 @@ public class GameView extends GridLayout {
     // 由于手机可能不同，我们需要动态地获取卡片的宽高，所以要重写下面这个方法获取当前布局的宽高，
     // 为了让手机不会因倒过来改变宽高，要去mainifest里配置
     // 只会在手机里第一次运行的时候执行，之后不会改变
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -68,6 +67,7 @@ public class GameView extends GridLayout {
         }
         addRandomNum();
         addRandomNum();
+        my2048.initScore();
     }
 
     private void addCards() {
@@ -174,7 +174,7 @@ public class GameView extends GridLayout {
                         } else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x1][y].setNum(0);
-                           // my2048.addScore(cardsMap[x][y].getNum());
+                           my2048.addScore(cardsMap[x][y].getNum());
                             break;
                         }
                         break;
@@ -206,7 +206,7 @@ public class GameView extends GridLayout {
                         } else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x1][y].setNum(0);
-                            //my2048.addScore(cardsMap[x][y].getNum());
+                            my2048.addScore(cardsMap[x][y].getNum());
                             merge = true;
                             break;
                         }
@@ -240,7 +240,7 @@ public class GameView extends GridLayout {
                         } else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x][y1].setNum(0);
-                           // my2048.addScore(cardsMap[x][y].getNum());
+                            my2048.addScore(cardsMap[x][y].getNum());
                             merge = true;
                             break;
                         }
@@ -274,7 +274,7 @@ public class GameView extends GridLayout {
                         } else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
                             cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
                             cardsMap[x][y1].setNum(0);
-                            //my2048.addScore(cardsMap[x][y].getNum());
+                            my2048.addScore(cardsMap[x][y].getNum());
                             merge = true;
                             break;
                         }

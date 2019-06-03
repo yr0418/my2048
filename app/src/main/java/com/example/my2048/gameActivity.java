@@ -16,16 +16,20 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.my2048.tool.GameView;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class gameActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
-
+    private int score = 0;
+    private TextView tvScore;
+    private TextView tvBestScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +40,12 @@ public class gameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.mylinearlaout);
-
+        linearLayout = (LinearLayout)findViewById(R.id.mylinearlaout);
+        tvScore = (TextView) findViewById(R.id.tvScore);
+        tvBestScore = (TextView) findViewById(R.id.bestScore);
+        //开始游戏
         GameView.getGameView().initGameView();
-
+        //设置表格的大小
         ImageButton resbtn = (ImageButton) findViewById(R.id.imageButton3);
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();//屏幕宽度
@@ -64,7 +70,7 @@ public class gameActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 GameView.getGameView().startGame();
-                                //clearScore();
+                                clearScore();
                             }
                         })
                         .create().show();
@@ -74,5 +80,47 @@ public class gameActivity extends AppCompatActivity {
 
     private gameActivity getgameActivity(){
         return this;
+    }
+
+    //显示当前分数
+    public void showScore() {
+        tvScore.setText(score + "");
+    }
+    //显示最高分数
+    public void showBestScore(int s) {
+        tvBestScore.setText(s + "");
+    }
+    //分数清0
+    public void clearScore() {
+        score = 0;
+        showScore();
+    }
+    //更新增加当前分数
+    public void addScore(int s) {
+        score += s;
+        showScore();
+        int maxScore = Math.max(score, getBestScore());
+        saveBestScore(maxScore);
+        showBestScore(maxScore);
+    }
+    //获取最高分
+    public int getBestScore(){
+
+        int bestScore=0;
+        return bestScore;
+    }
+    //保存最高分
+    public void saveBestScore(int s){
+    }
+    public void initScore(){//初始化分数
+        score = 0;
+        showScore();
+        int bestScore=getBestScore();
+        showBestScore(bestScore);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
