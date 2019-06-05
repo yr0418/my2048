@@ -53,9 +53,12 @@ public class gameActivity extends AppCompatActivity {
         linearLayout = (LinearLayout)findViewById(R.id.mylinearlaout);
         tvScore = (TextView) findViewById(R.id.tvScore);
         tvBestScore = (TextView) findViewById(R.id.bestScore);
+
+        //创建数据库
         myDBHelper = new MyDBHelper(this);
         db = myDBHelper.getReadableDatabase();
         cursor = db.rawQuery("select * from " + myDBHelper.getTableName(), null);
+
         //开始游戏
         GameView.getGameView().initGameView();
         //设置表格的大小
@@ -67,6 +70,8 @@ public class gameActivity extends AppCompatActivity {
         lp.width=width;
         lp.height=width;
         linearLayout.setLayoutParams(lp);
+
+
         if(cursor.getCount() == 0){
             db = myDBHelper.getWritableDatabase();
             db.beginTransaction();
@@ -136,7 +141,11 @@ public class gameActivity extends AppCompatActivity {
     }
     //保存最高分
     public void saveBestScore(int s){
-
+        db = myDBHelper.getWritableDatabase();
+        db.beginTransaction();
+        db.execSQL("update" + MyDBHelper.TABLE_NAME + "set Score="+s+"where Id = 2");
+        db.setTransactionSuccessful();
+        db.close();
     }
     public void initScore(){//初始化分数
         score = 0;
