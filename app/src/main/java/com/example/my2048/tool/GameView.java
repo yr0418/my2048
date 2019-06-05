@@ -107,6 +107,7 @@ public class GameView extends GridLayout {
     }
 
     public void initGameView() {
+        my2048 = (gameActivity) this.getContext();
         setColumnCount(4);// 设置表格为4列
         addCards();// 把参数传过去
         startGame();

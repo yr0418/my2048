@@ -19,26 +19,7 @@
         android:layout_height="62dp">
 
         <LinearLayout
-            android:layout_width="66dp"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="26dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/restart" />
-
-        <LinearLayout
-            android:layout_width="159dp"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="60dp"
+            android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:background="@android:color/black"
@@ -58,15 +39,28 @@
                 android:id="@+id/tvScore"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="3"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="2"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="26dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/restart" />
+
         <LinearLayout
-            android:layout_width="59dp"
+            android:layout_width="173dp"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="72dp"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:background="@android:color/black"

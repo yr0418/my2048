@@ -21,7 +21,11 @@ import android.widget.Toast;
 
 import com.example.my2048.tool.GameView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -105,12 +109,44 @@ public class gameActivity extends AppCompatActivity {
     }
     //获取最高分
     public int getBestScore(){
-
-        int bestScore=0;
+        StringBuilder stringBuilder=new StringBuilder("");
+        //获取文件在内存卡中files目录下的路径
+        File file= getApplicationContext().getFilesDir();
+        String filename=file.getAbsolutePath()+File.separator+"ScoreFile/bestScore.txt";
+        String score="0";
+        //打开文件输出流
+        try {
+            FileInputStream inputStream=new FileInputStream(filename);
+            byte[] buffer=new byte[1024];
+            int len=inputStream.read(buffer);
+            while (len>0){
+                stringBuilder.append(new String(buffer,0,len));
+                score=stringBuilder.toString();
+                len=inputStream.read(buffer);
+            }
+            inputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int bestScore=Integer.parseInt(score);
         return bestScore;
     }
     //保存最高分
     public void saveBestScore(int s){
+        File file=getApplicationContext().getFilesDir();
+        String filename=file.getAbsolutePath()+File.separator+"ScoreFile/bestScore.txtbestScore.txt";
+        try {
+            FileOutputStream outputStream=new FileOutputStream(filename);
+            outputStream.write(s);
+            outputStream.flush();
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void initScore(){//初始化分数
         score = 0;
