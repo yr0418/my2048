@@ -126,7 +126,12 @@ public class gameActivity extends AppCompatActivity {
     }
     //获取最高分
     public int getBestScore(){
-        int bestScore=0;
+        int bestScore=100;
+        db = myDBHelper.getReadableDatabase();
+        cursor = db.rawQuery("select * from " + MyDBHelper.TABLE_NAME + " where Id = 2", null);
+        while (cursor.moveToLast()){
+            bestScore=cursor.getInt(1);
+        }
         return bestScore;
     }
     //保存最高分
