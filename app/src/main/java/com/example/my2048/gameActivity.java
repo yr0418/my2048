@@ -3,34 +3,19 @@ package com.example.my2048;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.SystemClock;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.my2048.tool.GameView;
 import com.example.my2048.tool.MyDBHelper;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
 public class gameActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
@@ -56,9 +41,16 @@ public class gameActivity extends AppCompatActivity {
 
         //创建数据库
         myDBHelper = new MyDBHelper(this);
+        myDBHelper.getReadableDatabase();
         db = myDBHelper.getReadableDatabase();
-        cursor = db.rawQuery("select * from " + myDBHelper.getTableName(), null);
-
+        cursor = db.rawQuery("select * from s",null);
+        //初始化数据库
+        if(cursor==null || cursor.getCount()==0){
+            db = myDBHelper.getWritableDatabase();
+            db.execSQL("insert into s values(1,0)");
+            db.execSQL("insert into s values(2,0)");
+            db.close();
+        }
         //开始游戏
         GameView.getGameView().initGameView();
         //设置表格的大小
@@ -70,16 +62,6 @@ public class gameActivity extends AppCompatActivity {
         lp.width=width;
         lp.height=width;
         linearLayout.setLayoutParams(lp);
-
-
-        if(cursor.getCount() == 0){
-            db = myDBHelper.getWritableDatabase();
-            db.beginTransaction();
-            db.execSQL("insert into " + MyDBHelper.TABLE_NAME + "(Id, Score)values(1,0)");
-            db.execSQL("insert into " + MyDBHelper.TABLE_NAME + "(Id, Score)values(2,0)");
-            db.setTransactionSuccessful();
-            db.close();
-        }
 
         //重新开始游戏
         resbtn.setOnClickListener(new View.OnClickListener() {
@@ -133,18 +115,34 @@ public class gameActivity extends AppCompatActivity {
     public int getBestScore(){
         int bestScore=100;
         db = myDBHelper.getReadableDatabase();
-        cursor = db.rawQuery("select * from " + MyDBHelper.TABLE_NAME + " where Id = 2", null);
-        while (cursor.moveToLast()){
-            bestScore=cursor.getInt(1);
+        cursor = db.rawQuery("select * from s where Id=2",null);
+        while (cursor.moveToNext()){
+            bestScore=cursor.getInt(cursor.getColumnIndex("Score"));
         }
+        db.close();
         return bestScore;
+    }
+    //获取第一列的值
+    public int get_1(){
+        int num=100;
+        db = myDBHelper.getReadableDatabase();
+        cursor = db.rawQuery("select * from s where Id=2",null);
+        while (cursor.moveToNext()){
+            num=cursor.getInt(cursor.getColumnIndex("Score"));
+        }
+        db.close();
+        return num;
+    }
+    //修改第一列的值
+    public void set_1(){
+        db = myDBHelper.getReadableDatabase();
+        db.execSQL("update s set Score = 10 where Id = 2");
+        db.close();
     }
     //保存最高分
     public void saveBestScore(int s){
-        db = myDBHelper.getWritableDatabase();
-        db.beginTransaction();
-        db.execSQL("update" + MyDBHelper.TABLE_NAME + "set Score="+s+"where Id = 2");
-        db.setTransactionSuccessful();
+        db = myDBHelper.getReadableDatabase();
+        db.execSQL("update s set Score = "+s+" where Id = 2");
         db.close();
     }
     public void initScore(){//初始化分数

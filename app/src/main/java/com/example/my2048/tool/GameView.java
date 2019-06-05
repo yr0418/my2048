@@ -292,23 +292,33 @@ public class GameView extends GridLayout {
 
      //判断结束
     private void checkComplete() {
-
+        int key=my2048.get_1();
         boolean complete = true;
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                if (cardsMap[x][y].getNum() == 4096)
+                //这是一个骚操作
+                if (cardsMap[x][y].getNum() == 4096 && key==0){
                     new AlertDialog.Builder(getContext())
-                            .setTitle("你好")
-                            .setMessage("游戏胜利")
-                            .setPositiveButton("重来",
-                                    new DialogInterface.OnClickListener() {
+                            .setTitle("爱你")
+                            .setMessage("我知道，我没机会。但，还是不留遗憾吧")
+                            .setPositiveButton("click", new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onClick(
-                                                DialogInterface dialog,
-                                                int which) {
+                                        public void onClick(DialogInterface dialog, int which) {
                                             startGame();
+                                            my2048.set_1();
                                         }
-                                    }).show();
+                                    }).create().show();
+                }else {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("肖雯静同学")
+                            .setMessage("游戏胜利")
+                            .setPositiveButton("重来", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startGame();
+                                }
+                            }).create().show();
+                }
             }
         }
 
@@ -340,4 +350,5 @@ public class GameView extends GridLayout {
                             }).show();
         }
     }
+
 }
