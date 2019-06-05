@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.SystemClock;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.my2048.tool.GameView;
+import com.example.my2048.tool.MyDBHelper;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,6 +37,9 @@ public class gameActivity extends AppCompatActivity {
     private int score = 0;
     private TextView tvScore;
     private TextView tvBestScore;
+    private MyDBHelper myDBHelper;
+    private SQLiteDatabase db;
+    private Cursor cursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,9 @@ public class gameActivity extends AppCompatActivity {
         linearLayout = (LinearLayout)findViewById(R.id.mylinearlaout);
         tvScore = (TextView) findViewById(R.id.tvScore);
         tvBestScore = (TextView) findViewById(R.id.bestScore);
+        myDBHelper = new MyDBHelper(this);
+        db = myDBHelper.getReadableDatabase();
+        cursor = db.rawQuery("select * from " + myDBHelper.getTableName(), null);
         //开始游戏
         GameView.getGameView().initGameView();
         //设置表格的大小
@@ -58,6 +67,14 @@ public class gameActivity extends AppCompatActivity {
         lp.width=width;
         lp.height=width;
         linearLayout.setLayoutParams(lp);
+        if(cursor.getCount() == 0){
+            db = myDBHelper.getWritableDatabase();
+            db.beginTransaction();
+            db.execSQL("insert into " + MyDBHelper.TABLE_NAME + "(Id, Score)values(1,0)");
+            db.execSQL("insert into " + MyDBHelper.TABLE_NAME + "(Id, Score)values(2,0)");
+            db.setTransactionSuccessful();
+            db.close();
+        }
 
         //重新开始游戏
         resbtn.setOnClickListener(new View.OnClickListener() {
@@ -109,44 +126,12 @@ public class gameActivity extends AppCompatActivity {
     }
     //获取最高分
     public int getBestScore(){
-        StringBuilder stringBuilder=new StringBuilder("");
-        //获取文件在内存卡中files目录下的路径
-        File file= getApplicationContext().getFilesDir();
-        String filename=file.getAbsolutePath()+File.separator+"ScoreFile/bestScore.txt";
-        String score="0";
-        //打开文件输出流
-        try {
-            FileInputStream inputStream=new FileInputStream(filename);
-            byte[] buffer=new byte[1024];
-            int len=inputStream.read(buffer);
-            while (len>0){
-                stringBuilder.append(new String(buffer,0,len));
-                score=stringBuilder.toString();
-                len=inputStream.read(buffer);
-            }
-            inputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int bestScore=Integer.parseInt(score);
+        int bestScore=0;
         return bestScore;
     }
     //保存最高分
     public void saveBestScore(int s){
-        File file=getApplicationContext().getFilesDir();
-        String filename=file.getAbsolutePath()+File.separator+"ScoreFile/bestScore.txtbestScore.txt";
-        try {
-            FileOutputStream outputStream=new FileOutputStream(filename);
-            outputStream.write(s);
-            outputStream.flush();
-            outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
     public void initScore(){//初始化分数
         score = 0;
