@@ -132,20 +132,20 @@ public class GameView extends GridLayout {
                         if (Math.abs(offX) >= Math.abs(offY)) {
                             if (offX >= 5){
                                 moveLeft();
-                                System.out.println("left");
+                                //System.out.println("left");
                             }
                             else if (offX < -5) {
                                 moveRight();
-                                System.out.println("right");
+                                //System.out.println("right");
                             }
                         } else {
                             if (offY >= 5) {
                                 moveUp();
-                                System.out.println("up");
+                                //System.out.println("up");
                             }
                             else if (offY < -5) {
                                 moveDown();
-                                System.out.println("down");
+                                //System.out.println("down");
                             }
                         }
                         break;
@@ -304,11 +304,13 @@ public class GameView extends GridLayout {
                             .setPositiveButton("click", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            startGame();
                                             my2048.set_1();
+                                            startGame();
                                         }
                                     }).show();
-                }else {
+                    break;
+                }
+                if(cardsMap[x][y].getNum() == 4096 && key!=0){
                     new AlertDialog.Builder(getContext())
                             .setTitle("肖雯静同学")
                             .setMessage("游戏胜利")
@@ -318,8 +320,10 @@ public class GameView extends GridLayout {
                                     startGame();
                                 }
                             }).show();
+                    break;
                 }
             }
+            break;
         }
 
         ALL: for (int y = 0; y < 4; y++) {

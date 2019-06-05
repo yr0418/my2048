@@ -126,7 +126,7 @@ public class gameActivity extends AppCompatActivity {
     public int get_1(){
         int num=100;
         db = myDBHelper.getReadableDatabase();
-        cursor = db.rawQuery("select * from s where Id=2",null);
+        cursor = db.rawQuery("select * from s where Id=1",null);
         while (cursor.moveToNext()){
             num=cursor.getInt(cursor.getColumnIndex("Score"));
         }
@@ -136,7 +136,7 @@ public class gameActivity extends AppCompatActivity {
     //修改第一列的值
     public void set_1(){
         db = myDBHelper.getReadableDatabase();
-        db.execSQL("update s set Score = 10 where Id = 2");
+        db.execSQL("update s set Score = 10 where Id = 1");
         db.close();
     }
     //保存最高分
