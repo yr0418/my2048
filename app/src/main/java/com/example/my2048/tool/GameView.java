@@ -307,7 +307,7 @@ public class GameView extends GridLayout {
                                             startGame();
                                             my2048.set_1();
                                         }
-                                    }).create().show();
+                                    }).show();
                 }else {
                     new AlertDialog.Builder(getContext())
                             .setTitle("肖雯静同学")
@@ -317,7 +317,7 @@ public class GameView extends GridLayout {
                                 public void onClick(DialogInterface dialog, int which) {
                                     startGame();
                                 }
-                            }).create().show();
+                            }).show();
                 }
             }
         }
