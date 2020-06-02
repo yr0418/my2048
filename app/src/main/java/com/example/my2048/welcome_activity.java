@@ -2,7 +2,7 @@ package com.example.my2048;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -11,6 +11,9 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * app入口
+ */
 public class welcome_activity extends AppCompatActivity {
 
     @Override
@@ -24,9 +27,9 @@ public class welcome_activity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_activity);
 
         //显示toast
-        Toast.makeText(welcome_activity.this,"专为肖雯静同学制作",Toast.LENGTH_LONG).show();
+        Toast.makeText(welcome_activity.this,"专业实践--安卓开发",Toast.LENGTH_LONG).show();
 
-        //界面跳转
+        //界面跳转，跳转至游戏界面
         skip();
     }
 

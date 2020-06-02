@@ -59,6 +59,7 @@ public class GameView extends GridLayout {
     }
 
 
+    //初始化表格，游戏开始
     public void startGame() {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
@@ -70,6 +71,7 @@ public class GameView extends GridLayout {
         my2048.initScore();
     }
 
+    //添加卡片
     private void addCards() {
         //获取屏幕宽度
         DisplayMetrics displayMetrics;
@@ -106,6 +108,7 @@ public class GameView extends GridLayout {
         cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
     }
 
+    //游戏开始
     public void initGameView() {
         my2048 = (gameActivity) this.getContext();
         setColumnCount(4);// 设置表格为4列
@@ -296,23 +299,8 @@ public class GameView extends GridLayout {
         boolean complete = true;
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
-                //这是一个骚操作
-                if (cardsMap[x][y].getNum() == 4096 && key==0){
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("爱你")
-                            .setMessage("我知道，我没机会。但，还是不留遗憾吧")
-                            .setPositiveButton("click", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            my2048.set_1();
-                                            startGame();
-                                        }
-                                    }).show();
-                    break;
-                }
                 if(cardsMap[x][y].getNum() == 4096 && key!=0){
                     new AlertDialog.Builder(getContext())
-                            .setTitle("肖雯静同学")
                             .setMessage("游戏胜利")
                             .setPositiveButton("重来", new DialogInterface.OnClickListener() {
                                 @Override

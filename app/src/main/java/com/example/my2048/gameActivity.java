@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +53,7 @@ public class gameActivity extends AppCompatActivity {
         }
         //开始游戏
         GameView.getGameView().initGameView();
+
         //设置表格的大小
         ImageButton resbtn = (ImageButton) findViewById(R.id.imageButton3);
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
